@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tcp-congestion-analysis"
+version = "0.2.0"
+description = "Trace analysis and reproducibility tooling for NS-2 TCP Reno and experimental BBR-inspired congestion-control simulations."
+readme = "README.md"
+requires-python = ">=3.10"
+maintainers = [{ name = "Shayan Daneshyar" }]
+keywords = [
+  "tcp",
+  "congestion-control",
+  "bbr",
+  "reno",
+  "ns2",
+  "network-simulation",
+  "trace-analysis",
+  "throughput",
+  "rtt",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "Topic :: System :: Networking",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+dependencies = []
+
+[project.optional-dependencies]
+plots = ["matplotlib>=3.8,<4"]
+dev = ["pytest>=8,<10", "ruff>=0.6,<1", "build>=1.2,<2"]
+
+[project.scripts]
+tcp-trace-analyze = "tcp_congestion_analysis.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "B"]
+ignore = ["E501"]
